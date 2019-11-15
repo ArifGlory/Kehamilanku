@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "912370454764",
+    "firebase_url": "https://kehamilanku-89479.firebaseio.com",
+    "project_id": "kehamilanku-89479",
+    "storage_bucket": "kehamilanku-89479.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912370454764:android:3966c6550e7f7dcdb1d5c9",
+        "android_client_info": {
+          "package_name": "myproject.kehamilanku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912370454764-16k99k95qe2d27tl0u3c30mgasgd1f03.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "myproject.kehamilanku",
+            "certificate_hash": "ea6e4d451b776339d2b6ce82d3e7bf3bcf25299f"
+          }
+        },
+        {
+          "client_id": "912370454764-3q65h102p9v4pl7hcp0vaumkmt9inled.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGfVdgbGw3vMGAAjft3b92Zghbx1jhODI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912370454764-3q65h102p9v4pl7hcp0vaumkmt9inled.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
