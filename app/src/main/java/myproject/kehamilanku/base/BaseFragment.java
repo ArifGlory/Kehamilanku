@@ -3,19 +3,28 @@ package myproject.kehamilanku.base;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
+import myproject.kehamilanku.Kelas.TipsKehamilan;
+import myproject.kehamilanku.adapter.AdapterTipsKehamilan;
 
 
 /**
@@ -74,6 +83,38 @@ public class BaseFragment extends Fragment {
     }
 
 
+    public void getDataTips(CollectionReference reference, final List<TipsKehamilan> tipsKehamilanList, final AdapterTipsKehamilan adapterTipsKehamilan){
+        showDialogLoading();
+
+        ref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+               dismissLoading();
+                tipsKehamilanList.clear();
+
+                if (task.isSuccessful()){
+
+                    int size = task.getResult().size();
+                    if (size > 0){
+
+                        for (DocumentSnapshot doc : task.getResult()){
+
+                            TipsKehamilan tipsKehamilan = doc.toObject(TipsKehamilan.class);
+                            tipsKehamilanList.add(tipsKehamilan);
+
+                        }
+                        adapterTipsKehamilan.notifyDataSetChanged();
+
+                    }else{
+                        showInfoMessage("Belum ada data laundry");
+                    }
+
+                }else{
+                    showErrorMessage("Terjadi kesalahan,coba lagi nanti");
+                }
+            }
+        });
+    }
 
 
 

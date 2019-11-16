@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,9 +20,12 @@ import android.view.Menu;
 
 import myproject.kehamilanku.R;
 import myproject.kehamilanku.base.BaseActivity;
+import myproject.kehamilanku.fragment.FragmentHomeAdmin;
 
 public class PanelAdminActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    FragmentHomeAdmin fragmentHomeAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,8 @@ public class PanelAdminActivity extends BaseActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        fragmentHomeAdmin = new FragmentHomeAdmin();
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -35,6 +43,8 @@ public class PanelAdminActivity extends BaseActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        goToFragment(fragmentHomeAdmin,true);
     }
 
     @Override
@@ -62,11 +72,19 @@ public class PanelAdminActivity extends BaseActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
+    }
+
+    void goToFragment(Fragment fragment, boolean isTop) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.fragment_homeAdmin, fragment);
+        if (!isTop)
+            fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -75,19 +93,24 @@ public class PanelAdminActivity extends BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_tips) {
-
+        if (id == R.id.nav_tips) {
+            Intent i = new Intent(getApplicationContext(), PanelAdminActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_logout) {
             fAuth.signOut();
             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(i);
             finish();
+        } else if (id == R.id.nav_videosenam){
+
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void reloadListTipsKehamilan(){
+        fragmentHomeAdmin.reloadData();
     }
 }
