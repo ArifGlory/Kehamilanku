@@ -1,14 +1,16 @@
 package myproject.kehamilanku.activity;
 
 import android.annotation.SuppressLint;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import myproject.kehamilanku.Kelas.SharedVariable;
 import myproject.kehamilanku.R;
+import myproject.kehamilanku.admin.AddVideoSenam;
 import myproject.kehamilanku.base.BaseActivity;
 
 public class ListVideoSenamActivity extends BaseActivity {
@@ -28,5 +30,12 @@ public class ListVideoSenamActivity extends BaseActivity {
         if (SharedVariable.email.equals(SharedVariable.adminMail)){
             btnCreate.setVisibility(View.VISIBLE);
         }
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddVideoSenam.class);
+                startActivity(intent);
+            }
+        });
     }
 }

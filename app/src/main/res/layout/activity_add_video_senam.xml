@@ -34,27 +34,24 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <ImageView
-                    android:id="@+id/ivTips"
-                    android:src="@drawable/img_placeholder"
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/youtube_player_view"
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
-                    android:scaleType="fitCenter" />
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Klik gambar untuk ganti foto"
-                    android:textAlignment="center"
-                    android:textColor="@color/grey_800"
-                    android:textSize="13sp" />
+                    app:showFullScreenButton="false" />
 
+
+                <Button
+                    android:id="@+id/btnCek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/loginbutton_selector"
+                    android:padding="3dp"
+                    android:text="Cek Video"
+                    android:textColor="@color/white_greyish"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -66,8 +63,9 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Nama Tips"
-                        android:id="@+id/etNama"
+                        android:hint="ID Video"
+                        android:maxLines="1"
+                        android:id="@+id/etIDVideo"
                         android:inputType="textEmailAddress"
                         android:textColorHint="@color/black2"
                         android:textColor="@color/black2"
@@ -86,14 +84,17 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Deskripsi"
-                        android:id="@+id/etDeskripsi"
-                        android:inputType="textMultiLine"
+                        android:hint="Nama Video"
+                        android:id="@+id/etNama"
+                        android:inputType="textEmailAddress"
                         android:textColorHint="@color/black2"
                         android:textColor="@color/black2"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
 
 
@@ -104,7 +105,7 @@
                     android:layout_marginTop="15dp"
                     android:background="@drawable/loginbutton_selector"
                     android:padding="3dp"
-                    android:text="Simpan Perubahan"
+                    android:text="Simpan"
                     android:textColor="@color/white_greyish"
                     android:textSize="17sp"
                     android:textStyle="bold" />

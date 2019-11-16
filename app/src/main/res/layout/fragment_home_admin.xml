@@ -24,7 +24,7 @@
         android:textSize="20sp" />
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTipsKehamilan"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/tvNamaTips"
@@ -33,7 +33,7 @@
         android:clipToPadding="false"
         android:scrollbars="vertical" />
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnCreate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

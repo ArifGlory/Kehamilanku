@@ -3,7 +3,7 @@ package myproject.kehamilanku.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +19,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import myproject.kehamilanku.Kelas.SharedVariable;

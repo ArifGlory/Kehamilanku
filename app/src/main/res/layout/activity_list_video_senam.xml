@@ -10,7 +10,7 @@
     android:orientation="vertical">
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvVideoSenam"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/tvNamaTips"
@@ -19,7 +19,7 @@
         android:clipToPadding="false"
         android:scrollbars="vertical" />
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnCreate"
         android:visibility="invisible"
         android:layout_width="wrap_content"
