@@ -11,6 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import myproject.kehamilanku.R;
+import myproject.kehamilanku.activity.ListPerkembanganJanin;
+import myproject.kehamilanku.activity.ListPetugasActivity;
 import myproject.kehamilanku.activity.ListTipsKehamilan;
 import myproject.kehamilanku.activity.ListVideoSenamActivity;
 import myproject.kehamilanku.activity.ProfilActivity;
@@ -63,6 +65,20 @@ public class FragmentHomeUser extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ProfilActivity.class);
+                startActivity(intent);
+            }
+        });
+        rlPetugas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ListPetugasActivity.class);
+                startActivity(intent);
+            }
+        });
+        rlKembangJanin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ListPerkembanganJanin.class);
                 startActivity(intent);
             }
         });

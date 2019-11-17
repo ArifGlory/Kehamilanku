@@ -18,8 +18,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon,android:appComponentFactory">
-        <activity android:name=".activity.UbahProfilActivity"
-            android:label="Ubah Profil"></activity>
+        <activity android:name=".activity.ListPerkembanganJanin"
+            android:label="Perkembangan Janin"></activity>
+        <activity android:name=".activity.ListPetugasActivity"
+            android:label="Petugas Kesehatan"/>
+        <activity
+            android:name=".activity.UbahProfilActivity"
+            android:label="Ubah Profil" />
         <activity
             android:name=".activity.ProfilActivity"
             android:theme="@style/AppTheme.NoActionBar" />
