@@ -18,8 +18,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon,android:appComponentFactory">
-        <activity android:name=".activity.DetailVideoSenam"
-            android:label="Video Senam Hamil"></activity>
+        <activity android:name=".activity.UbahProfilActivity"
+            android:label="Ubah Profil"></activity>
+        <activity
+            android:name=".activity.ProfilActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ListTipsKehamilan"
+            android:label="Tips Kehamilan" />
+        <activity
+            android:name=".activity.DetailVideoSenam"
+            android:label="Video Senam Hamil" />
         <activity
             android:name=".admin.UbahVideoSenam"
             android:label="Ubah Video Senam" />

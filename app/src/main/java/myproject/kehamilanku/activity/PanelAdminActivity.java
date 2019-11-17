@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 
+import myproject.kehamilanku.Kelas.SharedVariable;
 import myproject.kehamilanku.R;
 import myproject.kehamilanku.admin.AddVideoSenam;
 import myproject.kehamilanku.base.BaseActivity;
@@ -96,6 +97,9 @@ public class PanelAdminActivity extends BaseActivity
             Intent i = new Intent(getApplicationContext(), PanelAdminActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_logout) {
+            //biar tombol create ga muncul di client
+            SharedVariable.email = "-";
+
             fAuth.signOut();
             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(i);

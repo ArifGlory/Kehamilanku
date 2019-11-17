@@ -115,6 +115,7 @@
                                 android:layout_marginStart="20dp"
                                 android:layout_marginTop="5dp"
                                 android:text="Alamat"
+                                android:id="@+id/tvAlamat"
                                 android:layout_below="@+id/tvNama"
                                 android:layout_toRightOf="@+id/ivProfPict"
                                 android:textColor="@color/black2"
@@ -316,7 +317,7 @@
                                 android:orientation="horizontal">
 
                                 <RelativeLayout
-                                    android:id="@+id/rlSedotBiasa"
+                                    android:id="@+id/rlTipsKehamilan"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1">
@@ -343,7 +344,7 @@
                                 </RelativeLayout>
 
                                 <RelativeLayout
-                                    android:id="@+id/rlKirimBerjadwal"
+                                    android:id="@+id/rlKembangJanin"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1">
@@ -370,7 +371,7 @@
                                 </RelativeLayout>
 
                                 <RelativeLayout
-                                    android:id="@+id/rlLokasiTangki"
+                                    android:id="@+id/rlProfil"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1">

@@ -22,7 +22,9 @@ import java.util.List;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 import myproject.kehamilanku.Kelas.TipsKehamilan;
+import myproject.kehamilanku.Kelas.UserPreference;
 import myproject.kehamilanku.Kelas.VideoSenam;
+import myproject.kehamilanku.adapter.AdapterTipsKehamilan;
 import myproject.kehamilanku.adapter.AdapterVideoSenam;
 
 
@@ -36,6 +38,7 @@ public class BaseActivity extends AppCompatActivity {
     public FirebaseAuth fAuth;
     public FirebaseUser fbUser;
     public CollectionReference ref;
+    public UserPreference mUserPref;
 
     @Override
     public void setContentView(int layoutResID) {
@@ -45,6 +48,7 @@ public class BaseActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         fbUser = FirebaseAuth.getInstance().getCurrentUser();
+        mUserPref = new UserPreference(this);
 
         pDialogLoading = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         pDialogLoading.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
@@ -113,6 +117,40 @@ public class BaseActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void getDataTips(CollectionReference reference, final List<TipsKehamilan> tipsKehamilanList, final AdapterTipsKehamilan adapterTipsKehamilan){
+        showLoading();
+
+        ref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                dismissLoading();
+                tipsKehamilanList.clear();
+
+                if (task.isSuccessful()){
+
+                    int size = task.getResult().size();
+                    if (size > 0){
+
+                        for (DocumentSnapshot doc : task.getResult()){
+
+                            TipsKehamilan tipsKehamilan = doc.toObject(TipsKehamilan.class);
+                            tipsKehamilanList.add(tipsKehamilan);
+
+                        }
+                        adapterTipsKehamilan.notifyDataSetChanged();
+
+                    }else{
+                        showInfoMessage("Belum ada data laundry");
+                    }
+
+                }else{
+                    showErrorMessage("Terjadi kesalahan,coba lagi nanti");
+                }
+            }
+        });
+    }
+
 
 
 }

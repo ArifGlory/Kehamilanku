@@ -24,6 +24,7 @@ import java.util.List;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import es.dmoral.toasty.Toasty;
 import myproject.kehamilanku.Kelas.TipsKehamilan;
+import myproject.kehamilanku.Kelas.UserPreference;
 import myproject.kehamilanku.adapter.AdapterTipsKehamilan;
 
 
@@ -42,6 +43,7 @@ public class BaseFragment extends Fragment {
     public FirebaseAuth fAuth;
     public FirebaseUser fbUser;
     public CollectionReference ref;
+    public UserPreference mUserPref;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class BaseFragment extends Fragment {
         fAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         fbUser = FirebaseAuth.getInstance().getCurrentUser();
+        mUserPref = new UserPreference(getActivity());
 
         pDialogLoading = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
         pDialogLoading.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
