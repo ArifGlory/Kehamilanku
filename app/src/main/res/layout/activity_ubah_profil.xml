@@ -88,25 +88,34 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:textColorHint="@color/black2"
-                        android:theme="@style/myEditTextStyleBlack"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/rlTanggal"
                         android:layout_height="wrap_content">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:id="@+id/imgPlace"
+                            android:tint="@color/black2"
+                            card_view:srcCompat="@drawable/ic_event_black_24dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_toRightOf="@+id/imgPlace"
                             android:layout_height="wrap_content"
-                            android:hint="No. Handphone"
-                            android:id="@+id/etPhone"
-                            android:inputType="number"
-                            android:textColorHint="@color/black2"
-                            android:textColor="@color/black2"
-                            android:drawableEnd="@drawable/ic_smartphone_black_24dp"/>
+                            android:text="Pilih Hari Terakhir Haid Pertama"
+                            android:textColor="@color/grey_800"
+                            android:id="@+id/tvTanggal"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
 
+                    </RelativeLayout>
 
 
                     <Button

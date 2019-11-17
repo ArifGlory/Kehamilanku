@@ -180,6 +180,7 @@
                                 android:layout_marginTop="10dp"
                                 android:layout_height="wrap_content"
                                 android:text="- hari lagi"
+                                android:id="@+id/tvSisaKehamilan"
                                 android:textAlignment="center"
                                 android:textColor="@color/grey_800"
                                 android:textSize="14sp" />
@@ -213,7 +214,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Usia kehamilan ibu"
+                                android:text="Usia kehamilan"
                                 android:textAlignment="center"
                                 android:textStyle="bold"
                                 android:textColor="@color/grey_800"
@@ -224,6 +225,7 @@
                                 android:layout_marginTop="10dp"
                                 android:layout_height="wrap_content"
                                 android:text="- Minggu - hari"
+                                android:id="@+id/tvUsiaKehamilan"
                                 android:textAlignment="center"
                                 android:textColor="@color/grey_800"
                                 android:textSize="14sp" />
@@ -267,7 +269,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_marginTop="10dp"
                                 android:layout_height="wrap_content"
-                                android:text="- April"
+                                android:text="--"
+                                android:id="@+id/tvHPL"
                                 android:textAlignment="center"
                                 android:textColor="@color/grey_800"
                                 android:textSize="14sp" />

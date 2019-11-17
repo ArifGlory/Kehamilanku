@@ -13,6 +13,7 @@ public class UserPreference {
     private String KEY_NAMA = "nama";
     private String KEY_NO_HP = "nope";
     private String KEY_PASSWORD = "password";
+    private String KEY_HTHP = "hthp";
     private SharedPreferences preferences;
 
     public UserPreference(Context context){
@@ -25,6 +26,12 @@ public class UserPreference {
     public void setEmail(String email){
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(KEY_EMAIL,email);
+        editor.apply();
+    }
+
+    public void setHthp(String hthp){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(KEY_HTHP,hthp);
         editor.apply();
     }
 
@@ -88,6 +95,10 @@ public class UserPreference {
 
     public String getEmail(){
         return preferences.getString(KEY_EMAIL,null);
+    }
+
+    public String getHthp(){
+        return preferences.getString(KEY_HTHP,null);
     }
 
 
