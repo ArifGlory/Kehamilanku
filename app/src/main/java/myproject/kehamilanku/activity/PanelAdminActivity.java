@@ -101,7 +101,7 @@ public class PanelAdminActivity extends BaseActivity
             startActivity(i);
             finish();
         } else if (id == R.id.nav_videosenam){
-            Intent i = new Intent(getApplicationContext(), AddVideoSenam.class);
+            Intent i = new Intent(getApplicationContext(), ListVideoSenamActivity.class);
             startActivity(i);
         }
 

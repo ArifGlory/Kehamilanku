@@ -105,23 +105,11 @@
                     android:layout_marginTop="15dp"
                     android:background="@drawable/loginbutton_selector"
                     android:padding="3dp"
-                    android:text="Simpan"
-                    android:textColor="@color/white_greyish"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btnEdit"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/loginbutton_selector"
-                    android:padding="3dp"
-                    android:visibility="gone"
                     android:text="Simpan Perubahan"
                     android:textColor="@color/white_greyish"
                     android:textSize="17sp"
                     android:textStyle="bold" />
+
 
 
             </LinearLayout>
