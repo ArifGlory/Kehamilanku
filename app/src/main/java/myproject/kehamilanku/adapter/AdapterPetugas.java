@@ -25,11 +25,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import myproject.kehamilanku.Kelas.Petugas;
 import myproject.kehamilanku.Kelas.SharedVariable;
 import myproject.kehamilanku.Kelas.TipsKehamilan;
 import myproject.kehamilanku.R;
 import myproject.kehamilanku.activity.DetailTipsKehamilan;
+import myproject.kehamilanku.activity.ListPetugasActivity;
 import myproject.kehamilanku.activity.PanelAdminActivity;
+import myproject.kehamilanku.admin.UbahPetugasActivity;
 import myproject.kehamilanku.admin.UbahTipsKehamilan;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -42,25 +45,35 @@ public class AdapterPetugas extends RecyclerView.Adapter<AdapterPetugas.MyViewHo
 
     private Context mContext;
     private SweetAlertDialog pDialogLoading,pDialodInfo;
+    private List<Petugas> petugasList;
     String[] list_petugas = {"Amelia","Azalea","Dr. Roberto"};
     String[] list_phone = {"0896288383","0899193833","0858919383"};
+    FirebaseFirestore firestore;
+    CollectionReference ref;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tvNamaPetugas,tvPhone;
         public Button btnCall;
+        public LinearLayout linePetugas;
 
         public MyViewHolder(View view) {
             super(view);
             btnCall = view.findViewById(R.id.btnCall);
             tvNamaPetugas = view.findViewById(R.id.tvNamaPetugas);
             tvPhone = view.findViewById(R.id.tvPhone);
+            linePetugas = view.findViewById(R.id.linePetugas);
 
         }
     }
 
-    public AdapterPetugas(Context mContext) {
+    public AdapterPetugas(Context mContext,List<Petugas> petugasList) {
         this.mContext = mContext;
+        this.petugasList = petugasList;
+        Firebase.setAndroidContext(mContext);
+        FirebaseApp.initializeApp(mContext);
+        firestore = FirebaseFirestore.getInstance();
+        ref = firestore.collection("petugas");
 
         pDialogLoading = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
         pDialogLoading.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
@@ -80,14 +93,56 @@ public class AdapterPetugas extends RecyclerView.Adapter<AdapterPetugas.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-       holder.tvNamaPetugas.setText(list_petugas[position]);
-       holder.tvPhone.setText(list_phone[position]);
+        final Petugas petugas = petugasList.get(position);
+
+       holder.tvNamaPetugas.setText(petugas.getNamaPetugas());
+       holder.tvPhone.setText(petugas.getPhonePetugas());
        holder.btnCall.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               String noTelepon = list_phone[position];
+               String noTelepon = petugas.getPhonePetugas();
                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", noTelepon, null));
                mContext.startActivity(intent);
+           }
+       });
+       holder.linePetugas.setOnLongClickListener(new View.OnLongClickListener() {
+           @Override
+           public boolean onLongClick(View v) {
+               if (SharedVariable.email.equals(SharedVariable.adminMail)){
+                   new SweetAlertDialog(mContext, SweetAlertDialog.WARNING_TYPE)
+                           .setTitleText("Kelola Petugas")
+                           .setContentText("Anda dapat melakukan perubahan data ini")
+                           .setConfirmText("Ubah Data")
+                           .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                               @Override
+                               public void onClick(SweetAlertDialog sDialog) {
+                                   sDialog.dismissWithAnimation();
+                                   Intent intent = new Intent(mContext, UbahPetugasActivity.class);
+                                   intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                                   intent.putExtra("petugas",petugas);
+                                   mContext.startActivity(intent);
+                               }
+                           })
+                           .setCancelButton("Hapus", new SweetAlertDialog.OnSweetClickListener() {
+                               @Override
+                               public void onClick(SweetAlertDialog sDialog) {
+                                   sDialog.dismissWithAnimation();
+                                   pDialogLoading.show();
+                                   ref.document(petugas.getIdPetugas()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                       @Override
+                                       public void onSuccess(Void aVoid) {
+                                           pDialogLoading.dismiss();
+                                           if (mContext instanceof ListPetugasActivity){
+                                               ((ListPetugasActivity)mContext).getDataPetugas();
+                                           }
+                                       }
+                                   });
+
+                               }
+                           })
+                           .show();
+               }
+               return true;
            }
        });
 
@@ -97,7 +152,7 @@ public class AdapterPetugas extends RecyclerView.Adapter<AdapterPetugas.MyViewHo
 
     @Override
     public int getItemCount() {
-        return list_petugas.length;
-       // return tipsKehamilanList.size();
+        //return list_petugas.length;
+        return petugasList.size();
     }
 }

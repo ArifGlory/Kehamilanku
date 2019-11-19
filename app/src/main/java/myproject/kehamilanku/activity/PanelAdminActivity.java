@@ -49,6 +49,7 @@ public class PanelAdminActivity extends BaseActivity
 
     @Override
     public void onBackPressed() {
+        SharedVariable.email = "-";
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -106,6 +107,9 @@ public class PanelAdminActivity extends BaseActivity
             finish();
         } else if (id == R.id.nav_videosenam){
             Intent i = new Intent(getApplicationContext(), ListVideoSenamActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_petugas){
+            Intent i = new Intent(getApplicationContext(), ListPetugasActivity.class);
             startActivity(i);
         }
 

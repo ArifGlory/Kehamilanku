@@ -18,10 +18,20 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon,android:appComponentFactory">
-        <activity android:name=".activity.ListPerkembanganJanin"
-            android:label="Perkembangan Janin"></activity>
-        <activity android:name=".activity.ListPetugasActivity"
-            android:label="Petugas Kesehatan"/>
+        <activity android:name=".activity.TabelBeratBadanActivity"
+            android:label="Berat badan"></activity>
+        <activity
+            android:name=".admin.UbahPetugasActivity"
+            android:label="Ubah Petugas" />
+        <activity
+            android:name=".admin.AddPetugasActivity"
+            android:label="Tambah Petugas" />
+        <activity
+            android:name=".activity.ListPerkembanganJanin"
+            android:label="Perkembangan Janin" />
+        <activity
+            android:name=".activity.ListPetugasActivity"
+            android:label="Petugas Kesehatan" />
         <activity
             android:name=".activity.UbahProfilActivity"
             android:label="Ubah Profil" />

@@ -14,6 +14,8 @@ public class UserPreference {
     private String KEY_NO_HP = "nope";
     private String KEY_PASSWORD = "password";
     private String KEY_HTHP = "hthp";
+    private String KEY_TINGGI = "tinggi";
+    private String KEY_BERAT = "berat";
     private SharedPreferences preferences;
 
     public UserPreference(Context context){
@@ -29,9 +31,21 @@ public class UserPreference {
         editor.apply();
     }
 
+    public void setBerat(int berat){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(KEY_BERAT,berat);
+        editor.apply();
+    }
+
     public void setHthp(String hthp){
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(KEY_HTHP,hthp);
+        editor.apply();
+    }
+
+    public void setTinggi(int tinggi){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(KEY_TINGGI,tinggi);
         editor.apply();
     }
 
@@ -95,6 +109,14 @@ public class UserPreference {
 
     public String getEmail(){
         return preferences.getString(KEY_EMAIL,null);
+    }
+
+    public int getBerat(){
+        return preferences.getInt(KEY_BERAT,0);
+    }
+
+    public int getTinggi(){
+        return preferences.getInt(KEY_TINGGI,0);
     }
 
     public String getHthp(){

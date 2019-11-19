@@ -14,7 +14,7 @@ import myproject.kehamilanku.base.BaseActivity;
 public class ProfilActivity extends BaseActivity {
 
     TextView tvNama,tvAlamat;
-    LinearLayout lineUbahProfil;
+    LinearLayout lineUbahProfil,lineBeratBadan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +24,19 @@ public class ProfilActivity extends BaseActivity {
         tvNama = findViewById(R.id.tvNama);
         tvAlamat = findViewById(R.id.tvAlamat);
         lineUbahProfil = findViewById(R.id.lineUbahProfil);
+        lineBeratBadan = findViewById(R.id.lineBeratBadan);
 
         lineUbahProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), UbahProfilActivity.class);
+                startActivity(intent);
+            }
+        });
+        lineBeratBadan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TabelBeratBadanActivity.class);
                 startActivity(intent);
             }
         });

@@ -24,7 +24,7 @@ import myproject.kehamilanku.base.BaseActivity;
 
 public class UbahProfilActivity extends BaseActivity {
 
-    EditText etAlamat,etNama;
+    EditText etAlamat,etNama,etTinggi,etBerat;
     Button btnSimpan;
     RelativeLayout rlTanggal;
     Calendar myCalendar,calset;
@@ -39,6 +39,8 @@ public class UbahProfilActivity extends BaseActivity {
 
         etAlamat = findViewById(R.id.etAlamat);
         etNama = findViewById(R.id.etNama);
+        etTinggi = findViewById(R.id.etTinggi);
+        etBerat = findViewById(R.id.etBerat);
         btnSimpan = findViewById(R.id.btnSimpan);
         rlTanggal = findViewById(R.id.rlTanggal);
         tvTanggal = findViewById(R.id.tvTanggal);
@@ -94,9 +96,16 @@ public class UbahProfilActivity extends BaseActivity {
         if (mUserPref.getAlamat() != null){
             etAlamat.setText(mUserPref.getAlamat());
         }
+        if (mUserPref.getTinggi() != 0){
+            etTinggi.setText(mUserPref.getTinggi());
+        }
+        if (mUserPref.getBerat() != 0){
+            etBerat.setText(mUserPref.getBerat());
+        }
 
         if (mUserPref.getHthp() != null){
             String HTHP = mUserPref.getHthp();
+            tanggal = HTHP;
             int year = Integer.parseInt(HTHP.substring(0,4));
             int month = Integer.parseInt(HTHP.substring(5,7)) - 1;
             int day = Integer.parseInt(HTHP.substring(8,10));
@@ -116,24 +125,33 @@ public class UbahProfilActivity extends BaseActivity {
     private void checkValidation() {
         String getNama = etNama.getText().toString();
         String getAlamat = etAlamat.getText().toString();
+        String getTinggi = etTinggi.getText().toString();
+        String getBerat = etBerat.getText().toString();
 
 
         if (getNama.equals("") || getNama.length() == 0
                 || getAlamat.equals("") || getAlamat.length() == 0
+                || getTinggi.equals("") || getTinggi.length() == 0
+                || getBerat.equals("") || getBerat.length() == 0
                 || tanggal == null
         ) {
 
             showErrorMessage("Semua Field Harus diisi");
         }
         else {
-            simpanProfil(getNama,getAlamat);
+            simpanProfil(getNama,getAlamat,getTinggi,getBerat);
         }
     }
 
-    private void simpanProfil(final String nama,final String alamat){
+    private void simpanProfil(final String nama,final String alamat,final String tinggi,final String berat){
+        int myTinggi = Integer.parseInt(tinggi);
+        int myBerat = Integer.parseInt(berat);
+
         mUserPref.setNama(nama);
         mUserPref.setAlamat(alamat);
         mUserPref.setHthp(tanggal);
+        mUserPref.setTinggi(myTinggi);
+        mUserPref.setBerat(myBerat);
         showSuccessMessage("Data Disimpan");
         onBackPressed();
     }

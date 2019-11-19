@@ -16,6 +16,11 @@
             android:title="Video Senam" />
 
         <item
+            android:id="@+id/nav_petugas"
+            android:icon="@drawable/ic_account_box_black_24dp"
+            android:title="Petugas" />
+
+        <item
             android:id="@+id/nav_logout"
             android:title="Logout" />
     </group>
