@@ -58,9 +58,9 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/ivProfPict"
-                        card_view:srcCompat="@drawable/ic_user"
+                        android:src="@drawable/ic_user"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center_horizontal" />

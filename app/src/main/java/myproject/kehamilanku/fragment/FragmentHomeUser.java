@@ -12,12 +12,15 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import myproject.kehamilanku.R;
 import myproject.kehamilanku.activity.ListPerkembanganJanin;
 import myproject.kehamilanku.activity.ListPetugasActivity;
@@ -43,6 +46,7 @@ public class FragmentHomeUser extends BaseFragment {
     String HTHP;
     Calendar myCalendar,calset;
     int year,month,day;
+    CircleImageView ivProfPict;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +64,9 @@ public class FragmentHomeUser extends BaseFragment {
         tvHPL = view.findViewById(R.id.tvHPL);
         tvSisaKehamilan = view.findViewById(R.id.tvSisaKehamilan);
         tvUsiaKehamilan = view.findViewById(R.id.tvUsiaKehamilan);
+        ivProfPict = view.findViewById(R.id.ivProfPict);
+
+
 
         rlTipsKehamilan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,6 +220,12 @@ public class FragmentHomeUser extends BaseFragment {
             tvAlamat.setText(mUserPref.getAlamat());
         }else{
             tvAlamat.setText("Alamat Belum di setting");
+        }
+
+        if (mUserPref.getFoto() != null){
+            Glide.with(getActivity())
+                    .load(mUserPref.getFoto())
+                    .into(ivProfPict);
         }
     }
 

@@ -2,14 +2,20 @@ package myproject.kehamilanku.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -18,6 +24,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import myproject.kehamilanku.Kelas.AlarmReceiver;
 import myproject.kehamilanku.Kelas.Utils;
 import myproject.kehamilanku.R;
 import myproject.kehamilanku.base.BaseActivity;
@@ -31,6 +38,9 @@ public class UbahProfilActivity extends BaseActivity {
     TextView tvTanggal;
     DatePickerDialog.OnDateSetListener date;
     String tanggal;
+    Switch toogleNotif;
+    boolean isCheckedNotif = false;
+    final static int RQS1 = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +54,7 @@ public class UbahProfilActivity extends BaseActivity {
         btnSimpan = findViewById(R.id.btnSimpan);
         rlTanggal = findViewById(R.id.rlTanggal);
         tvTanggal = findViewById(R.id.tvTanggal);
+        toogleNotif = findViewById(R.id.toogleNotif);
 
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +84,17 @@ public class UbahProfilActivity extends BaseActivity {
                 updateLabel();
             }
         };
+        toogleNotif.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked){
+                    isCheckedNotif = true;
+                }else{
+                    isCheckedNotif = false;
+                }
+            }
+        });
 
         setView();
     }
@@ -97,10 +119,10 @@ public class UbahProfilActivity extends BaseActivity {
             etAlamat.setText(mUserPref.getAlamat());
         }
         if (mUserPref.getTinggi() != 0){
-            etTinggi.setText(mUserPref.getTinggi());
+            etTinggi.setText(mUserPref.getTinggi()+ "");
         }
         if (mUserPref.getBerat() != 0){
-            etBerat.setText(mUserPref.getBerat());
+            etBerat.setText(mUserPref.getBerat()+"");
         }
 
         if (mUserPref.getHthp() != null){
@@ -117,6 +139,38 @@ public class UbahProfilActivity extends BaseActivity {
             calset.set(year,month,day,00,00,00);
             month = month +1;
             tvTanggal.setText("Hari Pertama Haid Terakhir : "+day+"-"+month+"-"+year);
+        }
+
+        if (mUserPref.getIsLoggedIn() != null){
+            if (mUserPref.getIsLoggedIn().equals("true")){
+                toogleNotif.setChecked(true);
+            }else{
+                toogleNotif.setChecked(false);
+            }
+        }
+
+
+    }
+
+    private void setAlarm(Calendar targetCal){
+        Log.d("alarmSet"," on :"+"*****\n"+"Alarm Set On "+"\n"
+                +targetCal.getTime()+"\n*****");
+
+        Intent i = new Intent(getBaseContext(), AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(),RQS1,i,0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        //alarmManager.set(AlarmManager.RTC_WAKEUP,targetCal.getTimeInMillis(),pendingIntent);
+
+        if (Build.VERSION.SDK_INT < 23){
+
+            if (Build.VERSION.SDK_INT >= 19){
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP,targetCal.getTimeInMillis(),pendingIntent);
+            }else {
+                alarmManager.set(AlarmManager.RTC_WAKEUP,targetCal.getTimeInMillis(),pendingIntent);
+            }
+
+        }else {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,targetCal.getTimeInMillis(),pendingIntent);
         }
 
 
@@ -152,6 +206,24 @@ public class UbahProfilActivity extends BaseActivity {
         mUserPref.setHthp(tanggal);
         mUserPref.setTinggi(myTinggi);
         mUserPref.setBerat(myBerat);
+
+        if (isCheckedNotif){
+            int year = Integer.parseInt(tanggal.substring(0,4));
+            int month = Integer.parseInt(tanggal.substring(5,7)) - 1;
+            int day = Integer.parseInt(tanggal.substring(8,10));
+
+            Log.d("HTHP","tahun : "+year);
+            Log.d("HTHP","bulan : "+month);
+            Log.d("HTHP","hari : "+day);
+
+            calset.set(year,month,day,00,00,00);
+            calset.add(Calendar.MONTH,3);
+            setAlarm(calset);
+        }else{
+            calset.add(Calendar.YEAR,3);
+            setAlarm(calset);
+        }
+
         showSuccessMessage("Data Disimpan");
         onBackPressed();
     }
