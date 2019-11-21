@@ -25,7 +25,7 @@
             android:label="Ganti Foto"></activity>
         <activity
             android:name=".activity.TabelBeratBadanActivity"
-            android:label="Berat badan" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".admin.UbahPetugasActivity"
             android:label="Ubah Petugas" />
@@ -34,10 +34,10 @@
             android:label="Tambah Petugas" />
         <activity
             android:name=".activity.ListPerkembanganJanin"
-            android:label="Perkembangan Janin" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.ListPetugasActivity"
-            android:label="Petugas Kesehatan" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.UbahProfilActivity"
             android:label="Ubah Profil" />
@@ -46,7 +46,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.ListTipsKehamilan"
-            android:label="Tips Kehamilan" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.DetailVideoSenam"
             android:label="Video Senam Hamil" />
@@ -58,7 +58,7 @@
             android:label="Tambah Video" />
         <activity
             android:name=".activity.ListVideoSenamActivity"
-            android:label="Video Senam" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".admin.UbahTipsKehamilan"
             android:label="Ubah Data" />

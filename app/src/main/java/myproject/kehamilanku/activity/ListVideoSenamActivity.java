@@ -68,4 +68,8 @@ public class ListVideoSenamActivity extends BaseActivity {
         super.onResume();
         getDataVideoSenam(ref,videoSenamList,adapter);
     }
+
+    public void keBack(View view) {
+        onBackPressed();
+    }
 }

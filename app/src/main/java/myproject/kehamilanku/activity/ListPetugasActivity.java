@@ -93,4 +93,8 @@ public class ListPetugasActivity extends BaseActivity {
             }
         });
     }
+
+    public void keBack(View view) {
+        onBackPressed();
+    }
 }

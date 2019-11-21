@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 
 import myproject.kehamilanku.R;
 import myproject.kehamilanku.adapter.AdapterPerkembanganJanin;
@@ -28,5 +29,9 @@ public class ListPerkembanganJanin extends BaseActivity {
         rvPerkembanganJanin.setHasFixedSize(true);
         rvPerkembanganJanin.setItemAnimator(new DefaultItemAnimator());
         rvPerkembanganJanin.setAdapter(adapter);
+    }
+
+    public void keBack(View view) {
+        onBackPressed();
     }
 }

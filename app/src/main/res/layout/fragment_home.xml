@@ -339,7 +339,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_alignParentBottom="true"
                                         android:layout_marginBottom="20dp"
-                                        android:text="Tips Kehamilan"
+                                        android:text="Tips dan Resiko Kehamilan"
                                         android:textAlignment="center"
                                         android:textColor="@color/grey_800"
                                         android:textSize="14sp" />
@@ -366,7 +366,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_alignParentBottom="true"
                                         android:layout_marginBottom="20dp"
-                                        android:text="Tumbuh Janin"
+                                        android:text="Tumbuh Kembang Janin"
                                         android:textAlignment="center"
                                         android:textColor="@color/grey_800"
                                         android:textSize="14sp" />
@@ -456,6 +456,33 @@
                                         android:layout_alignParentBottom="true"
                                         android:layout_marginBottom="20dp"
                                         android:text="Kontak Petugas Kesehatan"
+                                        android:textAlignment="center"
+                                        android:textColor="@color/grey_800"
+                                        android:textSize="14sp" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/rlBeratBadan"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <ImageView
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:layout_above="@+id/tvBerat"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginBottom="5dp"
+                                        android:src="@drawable/scale" />
+
+                                    <TextView
+                                        android:id="@+id/tvBerat"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_marginBottom="20dp"
+                                        android:text="Berat Badan Ibu"
                                         android:textAlignment="center"
                                         android:textColor="@color/grey_800"
                                         android:textSize="14sp" />

@@ -27,6 +27,7 @@ import myproject.kehamilanku.activity.ListPetugasActivity;
 import myproject.kehamilanku.activity.ListTipsKehamilan;
 import myproject.kehamilanku.activity.ListVideoSenamActivity;
 import myproject.kehamilanku.activity.ProfilActivity;
+import myproject.kehamilanku.activity.TabelBeratBadanActivity;
 import myproject.kehamilanku.base.BaseFragment;
 
 
@@ -40,7 +41,7 @@ public class FragmentHomeUser extends BaseFragment {
         // Required empty public constructor
     }
 
-    RelativeLayout rlTipsKehamilan,rlKembangJanin,rlProfil,rlVideo,rlPetugas;
+    RelativeLayout rlTipsKehamilan,rlKembangJanin,rlProfil,rlVideo,rlPetugas,rlBeratBadan;
     public static android.app.AlertDialog dialog;
     TextView tvNama,tvAlamat,tvHPL,tvSisaKehamilan,tvUsiaKehamilan;
     String HTHP;
@@ -59,6 +60,7 @@ public class FragmentHomeUser extends BaseFragment {
         rlProfil = view.findViewById(R.id.rlProfil);
         rlVideo = view.findViewById(R.id.rlVideo);
         rlPetugas = view.findViewById(R.id.rlPetugas);
+        rlBeratBadan = view.findViewById(R.id.rlBeratBadan);
         tvNama = view.findViewById(R.id.tvNama);
         tvAlamat = view.findViewById(R.id.tvAlamat);
         tvHPL = view.findViewById(R.id.tvHPL);
@@ -100,6 +102,13 @@ public class FragmentHomeUser extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ListPerkembanganJanin.class);
+                startActivity(intent);
+            }
+        });
+        rlBeratBadan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), TabelBeratBadanActivity.class);
                 startActivity(intent);
             }
         });

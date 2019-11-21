@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -210,5 +211,9 @@ public class TabelBeratBadanActivity extends BaseActivity {
             beratBadanList.add(bodyTabel);
         }
         adapter.notifyDataSetChanged();
+    }
+
+    public void keBack(View view) {
+        onBackPressed();
     }
 }

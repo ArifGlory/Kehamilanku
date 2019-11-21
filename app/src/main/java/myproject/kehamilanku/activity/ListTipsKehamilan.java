@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -48,5 +49,9 @@ public class ListTipsKehamilan extends BaseActivity {
     protected void onResume() {
         super.onResume();
         getDataTips(ref,tipsKehamilanList,adapter);
+    }
+
+    public void keBack(View view) {
+        onBackPressed();
     }
 }
