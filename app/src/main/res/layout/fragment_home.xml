@@ -282,6 +282,93 @@
                 </LinearLayout>
 
 
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        card_view:cardBackgroundColor="@color/white"
+                        card_view:cardCornerRadius="5dp"
+                        card_view:cardElevation="5dp"
+                        card_view:cardUseCompatPadding="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:id="@+id/rlKeJanin"
+                            android:paddingHorizontal="5dp"
+                            android:layout_height="100dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="70dp"
+                                android:src="@drawable/pregnant"
+                                android:id="@+id/ivFotoJanin"
+                                android:layout_height="70dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_centerVertical="true"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="15dp"
+                                android:text="Bulan janin belum di setting"
+                                android:id="@+id/tvBulanJanin"
+                                android:layout_toRightOf="@+id/ivFotoJanin"
+                                android:textColor="@color/black2"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="5dp"
+                                android:text="Trisemester belum di setting"
+                                android:id="@+id/tvTrisemester"
+                                android:layout_below="@+id/tvBulanJanin"
+                                android:layout_toRightOf="@+id/ivFotoJanin"
+                                android:textColor="@color/black2"
+                                android:textSize="15sp"
+                                android:textStyle="normal" />
+
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        card_view:cardBackgroundColor="@color/white"
+                        card_view:cardCornerRadius="5dp"
+                        card_view:cardElevation="5dp"
+                        card_view:cardUseCompatPadding="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:padding="5dp"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="5dp"
+                                android:text="Berat badan belum di setting"
+                                android:id="@+id/tvInfoBerat"
+                                android:textColor="@color/black2"
+                                android:textSize="15sp"
+                                android:textStyle="normal" />
+
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:layout_width="wrap_content"

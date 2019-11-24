@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -21,6 +22,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import myproject.kehamilanku.Kelas.TabelBeratBadan;
 import myproject.kehamilanku.R;
 import myproject.kehamilanku.activity.ListPerkembanganJanin;
 import myproject.kehamilanku.activity.ListPetugasActivity;
@@ -41,13 +43,14 @@ public class FragmentHomeUser extends BaseFragment {
         // Required empty public constructor
     }
 
-    RelativeLayout rlTipsKehamilan,rlKembangJanin,rlProfil,rlVideo,rlPetugas,rlBeratBadan;
+    RelativeLayout rlTipsKehamilan,rlKembangJanin,rlProfil,rlVideo,rlPetugas,rlBeratBadan,rlKeJanin;
     public static android.app.AlertDialog dialog;
-    TextView tvNama,tvAlamat,tvHPL,tvSisaKehamilan,tvUsiaKehamilan;
+    TextView tvNama,tvAlamat,tvHPL,tvSisaKehamilan,tvUsiaKehamilan,tvBulanJanin,tvTrisemester,tvInfoBerat;
     String HTHP;
     Calendar myCalendar,calset;
     int year,month,day;
     CircleImageView ivProfPict;
+    CircleImageView ivFotoJanin;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,15 +60,20 @@ public class FragmentHomeUser extends BaseFragment {
 
         rlTipsKehamilan = view.findViewById(R.id.rlTipsKehamilan);
         rlKembangJanin = view.findViewById(R.id.rlKembangJanin);
+        rlKeJanin = view.findViewById(R.id.rlKeJanin);
         rlProfil = view.findViewById(R.id.rlProfil);
+        ivFotoJanin = view.findViewById(R.id.ivFotoJanin);
         rlVideo = view.findViewById(R.id.rlVideo);
         rlPetugas = view.findViewById(R.id.rlPetugas);
         rlBeratBadan = view.findViewById(R.id.rlBeratBadan);
         tvNama = view.findViewById(R.id.tvNama);
         tvAlamat = view.findViewById(R.id.tvAlamat);
+        tvBulanJanin = view.findViewById(R.id.tvBulanJanin);
         tvHPL = view.findViewById(R.id.tvHPL);
         tvSisaKehamilan = view.findViewById(R.id.tvSisaKehamilan);
         tvUsiaKehamilan = view.findViewById(R.id.tvUsiaKehamilan);
+        tvTrisemester = view.findViewById(R.id.tvTrisemester);
+        tvInfoBerat = view.findViewById(R.id.tvInfoBerat);
         ivProfPict = view.findViewById(R.id.ivProfPict);
 
 
@@ -95,6 +103,13 @@ public class FragmentHomeUser extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ListPetugasActivity.class);
+                startActivity(intent);
+            }
+        });
+        rlKeJanin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ListPerkembanganJanin.class);
                 startActivity(intent);
             }
         });
@@ -139,7 +154,6 @@ public class FragmentHomeUser extends BaseFragment {
         }
 
 
-
         setView();
 
         return view;
@@ -160,9 +174,82 @@ public class FragmentHomeUser extends BaseFragment {
 
         long numberOfDays = getUnitBetweenDates(date1, date2, TimeUnit.DAYS);
         long numberOfWeek = numberOfDays / 7;
+        long numberOfMonth = numberOfDays / 30;
+        int  minggu        = (int) numberOfWeek;
+        setKeteranganJanin(numberOfMonth);
+        setKeteranganBerat(minggu);
+
+
         Log.d("UsiaKehamilan",": "+numberOfDays +" hari");
+        Log.d("UsiaKehamilan",": "+numberOfMonth +" bulan");
         tvUsiaKehamilan.setText(numberOfWeek+" Minggu "+numberOfDays+" Hari");
 
+    }
+
+    private void setKeteranganBerat(int numberOfWeek){
+
+
+        if (mUserPref.getBerat() != 0 && mUserPref.getTinggi() != 0){
+            Double bmi = 0.0;
+            Double tinggi = 0.0;
+            Double getTinggi = Double.valueOf(mUserPref.getTinggi());
+            tinggi = getTinggi / 100;
+            tinggi = tinggi * tinggi;
+            bmi = mUserPref.getBerat() / tinggi;
+
+            if (bmi < 18.5 ){
+                setTabelUnderweight(numberOfWeek,bmi);
+            }else if(bmi > 18.5 && bmi < 24.9){
+                setTabelIdeal(numberOfWeek,bmi);
+            }else if (bmi > 25 && bmi < 29.9){
+                setTabelOverweight(numberOfWeek,bmi);
+            }else{
+                setTabelObesitas(numberOfWeek,bmi);
+            }
+        }
+
+    }
+
+    private void setKeteranganJanin(long numberOfMonth){
+
+        if (numberOfMonth < 9){
+            numberOfMonth+=1;
+
+            tvBulanJanin.setText("Usia Janin : "+numberOfMonth+" Bulan");
+
+            if (numberOfMonth == 1){
+                ivFotoJanin.setImageResource(R.drawable.janin1);
+            }else if (numberOfMonth == 2){
+                ivFotoJanin.setImageResource(R.drawable.janin2);
+            }else if (numberOfMonth == 3){
+                ivFotoJanin.setImageResource(R.drawable.janin3);
+            }else if (numberOfMonth == 4){
+                ivFotoJanin.setImageResource(R.drawable.janin4);
+            }else if (numberOfMonth == 5){
+                ivFotoJanin.setImageResource(R.drawable.janin5);
+            }else if (numberOfMonth == 6){
+                ivFotoJanin.setImageResource(R.drawable.janin6);
+            }else if (numberOfMonth == 7){
+                ivFotoJanin.setImageResource(R.drawable.janin7);
+            }else if (numberOfMonth == 8){
+                ivFotoJanin.setImageResource(R.drawable.janin8);
+            }
+
+            //set trisemester
+            if (numberOfMonth <= 3){
+                tvTrisemester.setText("Kehamilan Trisemester Pertama");
+            }else if (numberOfMonth > 3 && numberOfMonth <=6){
+                tvTrisemester.setText("Kehamilan Trisemester Kedua");
+            }else if (numberOfMonth > 6 && numberOfMonth < 10 ){
+                tvTrisemester.setText("Kehamilan Trisemester Ketiga");
+            }
+
+        }else{
+            tvBulanJanin.setText("Usia Janin : "+9+" Bulan");
+            ivFotoJanin.setImageResource(R.drawable.janin9);
+
+            tvTrisemester.setText("Kehamilan Trisemester Ketiga");
+        }
     }
 
     private void hitungSisaMasaKehamilan() throws ParseException {
@@ -260,6 +347,142 @@ public class FragmentHomeUser extends BaseFragment {
                 hitungUsiaKehamilan();
             } catch (ParseException e) {
                 e.printStackTrace();
+            }
+
+        }
+    }
+
+    private void setTabelIdeal(int numberOfWeek,Double bmi){
+
+
+        Double rangeMin = 11.0;
+        rangeMin = rangeMin / 20;
+        Double rangeMax = 16.0;
+        rangeMax = rangeMax / 20;
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        Double beratMin = Double.valueOf(mUserPref.getBerat());
+        Double beratMax = Double.valueOf(mUserPref.getBerat());
+        Double rata2 = 0.0;
+
+        for (int c=2;c <=40; c+=2){
+            beratMin = beratMin + rangeMin;
+            beratMax = beratMax +rangeMax;
+            rata2 = (beratMax + beratMin) / 2;
+
+            String myMinggu = String.valueOf(df.format(c));
+            String myBeratMin = String.valueOf(df.format(beratMin));
+            String myBeratMax = String.valueOf(df.format(beratMax));
+            String myRata2 = String.valueOf(df.format(rata2));
+
+            //berarti dalam rentang 2 minggu yg sama
+            if (c == numberOfWeek || c - numberOfWeek == 1){
+                tvInfoBerat.setText("Berat badan yang direkomendasikan : \n" +
+                        "Minimum : "+myBeratMin+ " kg \n" +
+                        "Maksimum : "+myBeratMax+ " kg \n" +
+                        "Rata-rata : "+myRata2+ " kg");
+            }
+
+        }
+    }
+
+    private void setTabelUnderweight(int numberOfWeek,Double bmi){
+
+
+        Double rangeMin = 12.0;
+        rangeMin = rangeMin / 20;
+        Double rangeMax = 18.0;
+        rangeMax = rangeMax / 20;
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        Double beratMin = Double.valueOf(mUserPref.getBerat());
+        Double beratMax = Double.valueOf(mUserPref.getBerat());
+        Double rata2 = 0.0;
+
+        for (int c=2;c <=40; c+=2){
+            beratMin = beratMin + rangeMin;
+            beratMax = beratMax +rangeMax;
+            rata2 = (beratMax + beratMin) / 2;
+
+            String myMinggu = String.valueOf(df.format(c));
+            String myBeratMin = String.valueOf(df.format(beratMin));
+            String myBeratMax = String.valueOf(df.format(beratMax));
+            String myRata2 = String.valueOf(df.format(rata2));
+
+            //berarti dalam rentang 2 minggu yg sama
+            if (c == numberOfWeek || c - numberOfWeek == 1){
+                tvInfoBerat.setText("Berat badan yang direkomendasikan : \n" +
+                        "Minimum : "+myBeratMin+ " kg \n" +
+                        "Maksimum : "+myBeratMax+ " kg \n" +
+                        "Rata-rata : "+myRata2+ " kg");
+            }
+
+        }
+    }
+
+    private void setTabelOverweight(int numberOfWeek,Double bmi){
+
+
+        Double rangeMin = 7.0;
+        rangeMin = rangeMin / 20;
+        Double rangeMax = 11.0;
+        rangeMax = rangeMax / 20;
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        Double beratMin = Double.valueOf(mUserPref.getBerat());
+        Double beratMax = Double.valueOf(mUserPref.getBerat());
+        Double rata2 = 0.0;
+
+        for (int c=2;c <=40; c+=2){
+            beratMin = beratMin + rangeMin;
+            beratMax = beratMax +rangeMax;
+            rata2 = (beratMax + beratMin) / 2;
+
+            String myMinggu = String.valueOf(df.format(c));
+            String myBeratMin = String.valueOf(df.format(beratMin));
+            String myBeratMax = String.valueOf(df.format(beratMax));
+            String myRata2 = String.valueOf(df.format(rata2));
+
+            //berarti dalam rentang 2 minggu yg sama
+            if (c == numberOfWeek || c - numberOfWeek == 1){
+                tvInfoBerat.setText("Berat badan yang direkomendasikan : \n" +
+                        "Minimum : "+myBeratMin+ " kg \n" +
+                        "Maksimum : "+myBeratMax+ " kg \n" +
+                        "Rata-rata : "+myRata2+ " kg");
+            }
+
+        }
+    }
+
+    private void setTabelObesitas(int numberOfWeek,Double bmi){
+
+
+        Double rangeMin = 5.0;
+        rangeMin = rangeMin / 20;
+        Double rangeMax = 9.0;
+        rangeMax = rangeMax / 20;
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        Double beratMin = Double.valueOf(mUserPref.getBerat());
+        Double beratMax = Double.valueOf(mUserPref.getBerat());
+        Double rata2 = 0.0;
+
+        for (int c=2;c <=40; c+=2){
+            beratMin = beratMin + rangeMin;
+            beratMax = beratMax +rangeMax;
+            rata2 = (beratMax + beratMin) / 2;
+
+            String myMinggu = String.valueOf(df.format(c));
+            String myBeratMin = String.valueOf(df.format(beratMin));
+            String myBeratMax = String.valueOf(df.format(beratMax));
+            String myRata2 = String.valueOf(df.format(rata2));
+
+            //berarti dalam rentang 2 minggu yg sama
+            if (c == numberOfWeek || c - numberOfWeek == 1){
+                tvInfoBerat.setText("Berat badan yang direkomendasikan : \n" +
+                        "Minimum : "+myBeratMin+ " kg \n" +
+                        "Maksimum : "+myBeratMax+ " kg \n" +
+                        "Rata-rata : "+myRata2+ " kg");
             }
 
         }

@@ -54,12 +54,13 @@ public class AdapterPetugas extends RecyclerView.Adapter<AdapterPetugas.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tvNamaPetugas,tvPhone;
-        public Button btnCall;
+        public Button btnCall,btnPesan;
         public LinearLayout linePetugas;
 
         public MyViewHolder(View view) {
             super(view);
             btnCall = view.findViewById(R.id.btnCall);
+            btnPesan = view.findViewById(R.id.btnPesan);
             tvNamaPetugas = view.findViewById(R.id.tvNamaPetugas);
             tvPhone = view.findViewById(R.id.tvPhone);
             linePetugas = view.findViewById(R.id.linePetugas);
@@ -103,6 +104,13 @@ public class AdapterPetugas extends RecyclerView.Adapter<AdapterPetugas.MyViewHo
                String noTelepon = petugas.getPhonePetugas();
                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", noTelepon, null));
                mContext.startActivity(intent);
+           }
+       });
+       holder.btnPesan.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               String noTelepon = petugas.getPhonePetugas();
+               mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", noTelepon, null)));
            }
        });
        holder.linePetugas.setOnLongClickListener(new View.OnLongClickListener() {
